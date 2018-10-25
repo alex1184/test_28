@@ -29,3 +29,30 @@ BloggerBlogBundle_comment_create:
     requirements:
         methods:  POST
         blog_id: \d+
+
+BloggerBlogBundle_api:
+    path:  /api/{blog_id}
+    defaults: { _controller: "BloggerBlogBundle:Api:get" }
+    requirements:
+        methods:  GET
+        blog_id: \d+
+
+BloggerBlogBundle_api_delete:
+    path:  /api/delete/{blog_id}
+    defaults: { _controller: "BloggerBlogBundle:Api:delete" }
+    requirements:
+        methods:  POST
+        blog_id: \d+
+
+BloggerBlogBundle_api_create:
+    path:  /api/create/
+    defaults: { _controller: "BloggerBlogBundle:Api:post" }
+    requirements:
+        methods:  POST
+
+BloggerBlogBundle_api_update:
+    path:  /api/update/{blog_id}
+    defaults: { _controller: "BloggerBlogBundle:Api:put" }
+    requirements:
+        methods:  PUT
+        blog_id: \d+

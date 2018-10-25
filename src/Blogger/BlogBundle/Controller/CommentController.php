@@ -36,7 +36,7 @@ class CommentController extends Controller
 
         $comment  = new Comment();
         $comment->setBlog($blog);
-        $form = $this->createForm(CommentType::class, $comment);
+        $form = $this->createForm(BType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
