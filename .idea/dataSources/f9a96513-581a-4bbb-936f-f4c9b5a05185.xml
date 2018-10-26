@@ -13,100 +13,116 @@
     <schema id="7" parent="1" name="test"/>
     <table id="8" parent="2" name="blog"/>
     <table id="9" parent="2" name="comment"/>
-    <column id="10" parent="8" name="id">
+    <table id="10" parent="2" name="migration_versions"/>
+    <column id="11" parent="8" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="11" parent="8" name="title">
+    <column id="12" parent="8" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="12" parent="8" name="author">
+    <column id="13" parent="8" name="author">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="8" name="blog">
+    <column id="14" parent="8" name="blog">
       <Position>4</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="8" name="image">
+    <column id="15" parent="8" name="image">
       <Position>5</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="8" name="tags">
+    <column id="16" parent="8" name="tags">
       <Position>6</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="8" name="created">
+    <column id="17" parent="8" name="created">
       <Position>7</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="17" parent="8" name="updated">
+    <column id="18" parent="8" name="updated">
       <Position>8</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="18" parent="8" name="PRIMARY">
+    <column id="19" parent="8" name="slug">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="20" parent="8" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="19" parent="9" name="id">
+    <column id="21" parent="9" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="20" parent="9" name="blog_id">
+    <column id="22" parent="9" name="blog_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="21" parent="9" name="user">
+    <column id="23" parent="9" name="user">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="9" name="comment">
+    <column id="24" parent="9" name="comment">
       <Position>4</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="9" name="approved">
+    <column id="25" parent="9" name="approved">
       <Position>5</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="9" name="created">
+    <column id="26" parent="9" name="created">
       <Position>6</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="9" name="updated">
+    <column id="27" parent="9" name="updated">
       <Position>7</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="26" parent="9" name="IDX_9474526CDAE07E97">
+    <index id="28" parent="9" name="IDX_9474526CDAE07E97">
       <ColNames>blog_id</ColNames>
     </index>
-    <key id="27" parent="9" name="PRIMARY">
+    <key id="29" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="28" parent="9" name="FK_9474526CDAE07E97">
+    <foreign-key id="30" parent="9" name="FK_9474526CDAE07E97">
       <ColNames>blog_id</ColNames>
       <RefSchemaName>symfony</RefSchemaName>
       <RefTableName>blog</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
+    <column id="31" parent="10" name="version">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="32" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>
