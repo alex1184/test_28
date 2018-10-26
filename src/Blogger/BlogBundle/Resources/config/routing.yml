@@ -41,7 +41,7 @@ BloggerBlogBundle_api_delete:
     path:  /api/delete/{blog_id}
     defaults: { _controller: "BloggerBlogBundle:Api:delete" }
     requirements:
-        methods:  POST
+        methods:  DELETE
         blog_id: \d+
 
 BloggerBlogBundle_api_create:

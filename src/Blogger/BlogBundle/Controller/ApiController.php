@@ -85,7 +85,7 @@ class ApiController extends FOSRestController implements ClassResourceInterface
         $em->persist($formData);
         $em->flush();
 
-        return new Response('new blog was create','201');
+        return new Response('new blog created','201');
     }
 
     public function putAction(Request $request,$blog_id) {
@@ -112,7 +112,7 @@ class ApiController extends FOSRestController implements ClassResourceInterface
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return new Response("blog $blog_id was update",'201');
+        return new Response("blog $blog_id updated",'201');
     }
 
 
@@ -132,6 +132,6 @@ class ApiController extends FOSRestController implements ClassResourceInterface
         $em->remove($blog);
         $em->flush();
 
-        return new Response("blog $blog_id was delete",'201');
+        return new Response("blog $blog_id deleted",'201');
     }
 }

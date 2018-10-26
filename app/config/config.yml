@@ -101,24 +101,24 @@ fos_rest:
     body_listener: true
     param_fetcher_listener: true
     view:
-        #view_response_listener: 'force'
-        exception_wrapper_handler:  null
-        formats:
-            jsonp: true
-            json: true
-            xml: false
-            rss: false
-        mime_types:
-            json: ['application/json', 'application/x-json']
-            jpg: 'image/jpeg'
-            png: 'image/png'
-        jsonp_handler: ~
+          view_response_listener: 'force'
+          exception_wrapper_handler:  null
+          formats:
+              jsonp: true
+              json: true
+              xml: false
+              rss: false
+          mime_types:
+              json: ['application/json', 'application/x-json']
+              jpg: 'image/jpeg'
+              png: 'image/png'
+          jsonp_handler: ~
     routing_loader:
         default_format:  json
         include_format:  false
     format_listener:
         rules:
-            - { path: ^/api, priorities: [ json ], fallback_format: ~, prefer_extension: true }
-            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
+            - { path: ^/api, priorities: [ 'json' ], fallback_format: ~, prefer_extension: true }
+            - { path: ^/, priorities: [  '*/*' ], fallback_format: ~, prefer_extension: true }
     exception:
         enabled: true

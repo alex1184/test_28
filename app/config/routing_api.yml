@@ -1,4 +1,4 @@
-blogger_api:
-    prefix: /api
-    type: rest
-    resource: Blogger\BlogBundle\Controller\ApiController
+#blogger_api:
+#    prefix: /api
+#    type: rest
+#    resource: Blogger\BlogBundle\Controller\ApiController

@@ -6,10 +6,7 @@ NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: "/doc"
 
-blogger_api:
-    resource: "@BloggerBlogBundle/Resources/config/routing.yml"
-    type: rest
-    prefix:   /
+
 
 #api:
 #    type: rest
