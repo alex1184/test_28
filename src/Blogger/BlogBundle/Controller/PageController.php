@@ -7,6 +7,8 @@
  */
 
 namespace Blogger\BlogBundle\Controller;
+use Blogger\BlogBundle\Entity\Course;
+use Blogger\BlogBundle\Entity\Courses;
 use Blogger\BlogBundle\Entity\Enquiry;
 use Blogger\BlogBundle\Form\EnquiryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
