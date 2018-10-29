@@ -68,6 +68,7 @@ class CurrencyRateCommand extends ContainerAwareCommand
             $em = $this->getContainer()->get('doctrine');
             foreach($data->valutes AS $currency){
                 $c = $em->getRepository(CurrencyRate::class)->findOneBy(['NumCode' => $currency->getNumcode()]);
+                $em = $this->getContainer()->get('doctrine')->getManager();
                 if($c){
                     $c->setNominal($currency->getNominal());
                     $c->setCharCode($currency->getCharcode());
@@ -76,7 +77,6 @@ class CurrencyRateCommand extends ContainerAwareCommand
                 } else {
                     $em->persist($currency);
                 }
-                $em = $this->getContainer()->get('doctrine')->getManager();
                 $em->flush();
             }
         }
