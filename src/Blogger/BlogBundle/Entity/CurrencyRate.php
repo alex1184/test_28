@@ -8,9 +8,7 @@
 
 namespace Blogger\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as JMS;
-use JMS\Serializer\Annotation\Type;
 
 
 /**
@@ -60,9 +58,9 @@ class CurrencyRate
     protected $Name;
 
     /**
-     * @ORM\Column(name="value",type="float")
+     * @ORM\Column(name="value",type="string")
      * @JMS\Expose
-     * @JMS\Type("float")
+     * @JMS\Type("string")
      */
     protected $Value;
 
@@ -194,7 +192,7 @@ class CurrencyRate
      */
     public function setValue($value)
     {
-        $this->Value = $value;
+        $this->Value = number_format($value,4);
 
         return $this;
     }

@@ -3,6 +3,8 @@
 
 namespace Blogger\BlogBundle\Command;
 
+use Blogger\BlogBundle\Entity\CurrencyRate;
+use Blogger\BlogBundle\Entity\Result;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,7 +22,7 @@ class CurrencyRateCommand extends ContainerAwareCommand
         $useragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36';
         $timeout= 120;
         $dir            = dirname(__FILE__);
-        $cookie_file    = $dir . '/cookies/' . md5($_SERVER['REMOTE_ADDR']) . '.txt';
+        $cookie_file    = $dir . '/cookies/' . md5('127.0.0.1') . '.txt';
 
         $ch = curl_init('http://www.cbr.ru/scripts/XML_daily.asp');
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
@@ -38,8 +40,12 @@ class CurrencyRateCommand extends ContainerAwareCommand
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-type: application/xml']);
         curl_setopt($ch, CURLOPT_REFERER, 'http://www.google.com/');
         $content = curl_exec($ch);
-
         curl_close($ch);
+
+        if(!$content){
+            $output->write("Can't get  result");
+            die();
+        }
         $serializer = \JMS\Serializer\SerializerBuilder::create()
             ->setPropertyNamingStrategy(
                 new \JMS\Serializer\Naming\SerializedNameAnnotationStrategy(
@@ -48,21 +54,20 @@ class CurrencyRateCommand extends ContainerAwareCommand
             )
             ->build();
         $data = $serializer->deserialize($content, Result::class, 'xml');
-        $em = $this->getDoctrine()
+        $em = $this->getContainer()->get('doctrine')
             ->getRepository(CurrencyRate::class)
             ->findAll();
 
         if(empty($em)){
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getContainer()->get('doctrine')->getManager();
             foreach($data->valutes AS $currency){
                 $em->persist($currency);
                 $em->flush();
             }
         } else {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getContainer()->get('doctrine');
             foreach($data->valutes AS $currency){
-                $c = $em->getRepository('BloggerBlogBundle:CurrencyRate')
-                    ->findOneBy(['NumCode' => $currency->getNumcode()]);
+                $c = $em->getRepository(CurrencyRate::class)->findOneBy(['NumCode' => $currency->getNumcode()]);
                 if($c){
                     $c->setNominal($currency->getNominal());
                     $c->setCharCode($currency->getCharcode());
@@ -71,8 +76,10 @@ class CurrencyRateCommand extends ContainerAwareCommand
                 } else {
                     $em->persist($currency);
                 }
+                $em = $this->getContainer()->get('doctrine')->getManager();
                 $em->flush();
             }
         }
+        $output->write("Ok");
     }
 }
