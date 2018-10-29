@@ -13,8 +13,9 @@ class BloggerBlogExtension extends \Twig_Extension
     public function createdAgo(\DateTime $dateTime)
     {
         $delta = time() - $dateTime->getTimestamp();
-        if ($delta < 0)
-            throw new \InvalidArgumentException("createdAgo is unable to handle dates in the future");
+
+//        if ($delta < 0)
+//            throw new \InvalidArgumentException("createdAgo is unable to handle dates in the future");
 
         $duration = "";
         if ($delta < 60)
