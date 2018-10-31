@@ -28,6 +28,9 @@
                         <li><a href="{{ path('BloggerBlogBundle_homepage') }}">Home</a></li>
                         <li><a href="{{ path('BloggerBlogBundle_about') }}">About</a></li>
                         <li><a href="{{ path('BloggerBlogBundle_contact') }}">Contact</a></li>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a href="{{ path('_security_logout') }}">Quit</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             {% endblock %}

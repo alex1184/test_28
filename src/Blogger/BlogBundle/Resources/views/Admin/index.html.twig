@@ -1,0 +1,8 @@
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+{% block body %}
+    {% if app.user %}
+        <h2>
+            Добро пожаловать на администраторскую страницу,{{ app.user.username }}!
+        </h2>
+    {% endif %}
+{% endblock %}

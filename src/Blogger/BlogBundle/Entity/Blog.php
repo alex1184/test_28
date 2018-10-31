@@ -11,11 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\BlogRepository")
  * @ORM\Table(name="blog")
  * @ORM\HasLifecycleCallbacks
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Blog
 {
@@ -23,31 +26,51 @@ class Blog
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
+     * @JMS\Type("integer")
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string",length=100)
+     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="username")
+     * @ORM\JoinColumn(name="author", referencedColumnName="username")
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $author;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $blog;
 
     /**
      * @ORM\Column(type="string",length=50)
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $image;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $tags;
 
@@ -58,16 +81,25 @@ class Blog
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @JMS\Expose
+     * @JMS\Type("string")
      */
     protected $slug;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @JMS\Expose
+     * @JMS\Type("DateTime")
      */
     protected $created;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @JMS\Expose
+     * @JMS\Type("DateTime")
      */
     protected $updated;
 

@@ -29,7 +29,7 @@ class BlogRepository extends EntityRepository
     public function getBlog($id)
     {
         $qb = $this->createQueryBuilder('b')
-            ->select(['b.id','b.title','b.author','b.blog'])
+            ->select('b')
             ->where(['id' => $id]);
 
         return $qb->getQuery()

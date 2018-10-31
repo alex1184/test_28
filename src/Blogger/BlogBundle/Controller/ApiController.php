@@ -46,12 +46,9 @@ class ApiController extends FOSRestController implements ClassResourceInterface
         if(!$blog instanceof Blog){
             throw new NoResultException();
         }
-
-        return new Response(
-            json_encode(['title' => $blog->getTitle(),
-                         'author' => $blog->getAuthor(),
-                         'blog' => $blog->getBlog(),
-            ]),200);
+        $serializer = $this->container->get('jms_serializer');
+        $serializedData = $serializer->serialize($blog, 'json');
+        return new Response($serializedData,200);
     }
 
     /**
@@ -109,7 +106,6 @@ class ApiController extends FOSRestController implements ClassResourceInterface
             return new Response('error','500');
         }
 
-        $em = $this->getDoctrine()->getManager();
         $em->flush();
 
         return new Response("blog $blog_id updated",'201');
@@ -128,7 +124,6 @@ class ApiController extends FOSRestController implements ClassResourceInterface
             throw new NoResultException();
         }
 
-        $em = $this->getDoctrine()->getManager();
         $em->remove($blog);
         $em->flush();
 
